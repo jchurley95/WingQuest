@@ -11,6 +11,9 @@ app.use("/api/auth", authController);
 const restaurantController = require("./controllers/restaurantController.js");
 app.use("/api/restaurants", restaurantController);
 
+const ratingsController = require("./controllers/ratingsController.js");
+app.use("/api/ratings", ratingsController);
+
 app.use("/", (req, res) => {
     res.sendFile(express.static(__dirname, "../client/build", "index.html"))
 })

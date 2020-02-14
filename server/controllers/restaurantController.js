@@ -29,6 +29,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
+    console.log("Restaurant")
     let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.params.id
     axios({
         method: "GET",
@@ -38,26 +39,11 @@ router.get("/:id", (req, res) => {
             'Authorization': authToken
         }
     }).then(response => {
+        console.log(response.data)
         res.send(response.data);
     }).catch(err => {
         console.log(err);
         res.send(err);
-    })
-})
-
-router.get("/:id/rating", (req, res) => {
-    let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.params.id + "/rating"
-    axios({
-        method: 'GET',
-        url,
-        headers: {
-            'accept': 'application/json',
-            'Authorization': authToken
-        }
-    }).then(response => {
-
-    }).catch(err => {
-        
     })
 })
 

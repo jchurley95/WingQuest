@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Ratings from './Ratings';
 
 const RestaurantPageWrapper = styled.div`
     display: flex;
@@ -20,22 +21,26 @@ const Value = styled.div`
 
 const RestaurantPage = (props) => {
     const [restaurant, setRestaurant] = useState({});
+    const [ratings, setRatings] = useState([]);
     const [loadingData, toggleLoadingData] = useState(true);
     let access_token = props.auth ? JSON.parse(props.auth).access_token : null
     useEffect(() => {
-        let url = `/api/restaurants/${props.match.params.restaurantId}`;
-        axios({
-            method: 'get',
-            url,
-            headers: {access_token}
-        }).then(response => {
-            toggleLoadingData(false);
-            setRestaurant(response.data);
-        }).catch(err => {
-            toggleLoadingData(false);
+        let restaurantUrl = `/api/restaurants/${props.match.params.restaurantId}`;
+        let ratingUrl = `/api/ratings/${props.match.params.restaurantId}/rating`;
+        
+        let headers = {access_token}
+        axios.all([
+            axios({method: 'get', url: restaurantUrl, headers}),
+            axios({method: 'get', url: ratingUrl, headers})
+        ]).then(axios.spread(function(restaurantResp, ratingResp) {
+            setRestaurant(restaurantResp.data);
+            setRatings(ratingResp.data);
+            console.log(ratingResp)
+        })).catch(err => {
             console.log(err);
         })
     }, [])
+
     let address2 = restaurant.address2 ? ` ${restaurant.address2}` : "";
     let location = restaurant.address1 ? `${restaurant.address1}${address2} ${restaurant.city}, ${restaurant.state} ${restaurant.zip}` : null;
     return (
@@ -49,6 +54,9 @@ const RestaurantPage = (props) => {
                 <Value>{location}</Value>
             </div>
             {/* Use lat long to display map */}
+            <Ratings 
+                ratings={ratings}
+            />
         </RestaurantPageWrapper>
     );
 };
