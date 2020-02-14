@@ -72,9 +72,9 @@ const RestaurantPage = (props) => {
                 <h4>Location </h4>
                 <Value>{location}</Value>
             </div>
-            <GoogleMap 
+            {/* <GoogleMap 
                 locations={getLocationsFromRestaurants([restaurant])}
-            />
+            /> */}
             <h3>Ratings</h3>
             <div>
                 {
