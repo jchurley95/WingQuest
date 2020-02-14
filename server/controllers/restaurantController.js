@@ -29,7 +29,6 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
-    console.log("Restaurant")
     let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.params.id
     axios({
         method: "GET",
@@ -39,7 +38,6 @@ router.get("/:id", (req, res) => {
             'Authorization': authToken
         }
     }).then(response => {
-        console.log(response.data)
         res.send(response.data);
     }).catch(err => {
         console.log(err);

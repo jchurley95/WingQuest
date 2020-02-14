@@ -12,7 +12,6 @@ router.use((req, res, next) => {
 })
 
 router.get("/:id/rating", (req, res) => {
-    console.log("Rating")
     let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.params.id + "/rating"
     axios({
         method: 'GET',
