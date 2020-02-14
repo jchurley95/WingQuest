@@ -50,10 +50,9 @@ const LoginPage = (props) => {
                     username: usernameInput, 
                     password: passwordInput
             }).then(response => {
-                console.log(response);
                 props.handleAuth(response.data);
             }).catch(err => {
-                console.log("Err", err)
+                console.log(err)
                 setLoginError("Invalid username/password");
             })
         } else {

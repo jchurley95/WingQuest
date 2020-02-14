@@ -20,7 +20,6 @@ const HomePage = (props) => {
             url: "/api/restaurants",
             headers: {access_token}
         }).then(response => {
-            console.log(response);
             setRestaurants(response.data);
         }).catch(err => {
             console.log(err);

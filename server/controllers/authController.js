@@ -18,10 +18,9 @@ router.post("/getToken", (req, res) => {
         },
         data
     }).then(response => {
-        console.log(response.data)
         res.send(response.data);
     }).catch(err => {
-        console.log(err.response.status, err.response.message)
+        console.log(err)
         res.send(err.response);
     })
 })

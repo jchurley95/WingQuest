@@ -48,6 +48,7 @@ const RestaurantPage = (props) => {
                 <h4>Location </h4>
                 <Value>{location}</Value>
             </div>
+            {/* Use lat long to display map */}
         </RestaurantPageWrapper>
     );
 };

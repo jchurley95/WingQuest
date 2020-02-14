@@ -16,13 +16,13 @@ router.get("/", (req, res) => {
     }).then(response => {
         res.send(response.data);
     }).catch(err => {
+        console.log(err);
         res.send(err);
     })
 })
 
 router.get("/:id", (req, res) => {
     let authToken = `Bearer ${req.headers.access_token}`
-    console.log(req.params)
     let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.params.id
     axios({
         method: "GET",
@@ -34,6 +34,7 @@ router.get("/:id", (req, res) => {
     }).then(response => {
         res.send(response.data);
     }).catch(err => {
+        console.log(err);
         res.send(err);
     })
 })
