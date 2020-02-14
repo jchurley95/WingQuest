@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Restaurant from './Restaurant';
+import RestaurantTile from './RestaurantTile';
 import { BounceyLoader } from 'react-loaders-spinners';
+import GoogleMap from '../../GoogleMap/GoogleMap';
+import {getLocationsFromRestaurants} from '../../GoogleMap/mapUtil';
 
 const HomePageWrapper = styled.div`
     padding: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 `
 const RestaurantList = styled.div`
     display: flex;
@@ -47,11 +46,13 @@ const HomePage = (props) => {
     }
     return (
         <HomePageWrapper className="page">
+            <h1>Wing Quest</h1>
+            {/* <GoogleMap locations={getLocationsFromRestaurants(restaurants)}/> */}
             <RestaurantList>
                 {
                     restaurants.map((restaurant, index) => {
                         return (
-                            <Restaurant 
+                            <RestaurantTile 
                                 key={index}
                                 restaurant={restaurant}
                             />

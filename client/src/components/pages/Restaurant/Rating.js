@@ -8,11 +8,16 @@ const RatingWrapper = styled.div`
     margin: 5px;
 `
 
-const Judgement = styled.ul`
+const Characteristics = styled.ul`
     list-style-type: square;
 `
-const Value = styled.li`
-    color: #777;
+const Characteristic = styled.span`
+    font-weight: bold;
+    margin: 2px;
+`
+const Stars = styled.span`
+    color: darkred;
+    margin: 2px;
 `
 
 function getStars(numberOfStars, filled) {
@@ -33,16 +38,37 @@ const Rating = (props) => {
     });
     return (
         <RatingWrapper>
-            <h4>{props.rating.flavor.toUpperCase()}</h4>
-            <Judgement>
-                <Value>Appearance: {starRatings.appearance}</Value>
-                <Value>Aroma: {starRatings.aroma}</Value>
-                <Value>Tast: {starRatings.taste}</Value>
-                <Value>Size: {starRatings.size}</Value>
-                <Value>Texture: {starRatings.texture}</Value>
-                <Value>Value: {starRatings.value}</Value>
-                <Value>Experience: {starRatings.experience}</Value>
-            </Judgement>
+            <h3>{props.rating.flavor.toUpperCase()}</h3>
+            <Characteristics>
+                <li>
+                    <Characteristic>Appearance:</Characteristic>
+                    <Stars>{starRatings.appearance}</Stars>
+                </li>
+                <li>
+                    <Characteristic>Aroma:</Characteristic>
+                    <Stars>{starRatings.aroma}</Stars>
+                </li>
+                <li>
+                    <Characteristic>Taste:</Characteristic>
+                    <Stars>{starRatings.taste}</Stars>
+                </li>
+                <li>
+                    <Characteristic>Size:</Characteristic>
+                    <Stars>{starRatings.size}</Stars>
+                </li>
+                <li>
+                    <Characteristic>Texture:</Characteristic>
+                    <Stars>{starRatings.texture}</Stars>
+                </li>
+                <li>
+                    <Characteristic>Value:</Characteristic>
+                    <Stars>{starRatings.value}</Stars>
+                </li>
+                <li>
+                    <Characteristic>Experience:</Characteristic>
+                    <Stars>{starRatings.experience}</Stars>
+                </li>
+            </Characteristics>
         </RatingWrapper>
     );
 };

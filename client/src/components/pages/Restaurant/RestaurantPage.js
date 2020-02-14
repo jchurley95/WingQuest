@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Rating from './Rating';
 import _ from 'lodash';
 import { BounceyLoader } from 'react-loaders-spinners';
+import GoogleMap from '../../GoogleMap/GoogleMap';
+import {getLocationsFromRestaurants} from '../../GoogleMap/mapUtil';
 
 const RestaurantPageWrapper = styled.div`
     display: flex;
@@ -70,7 +72,9 @@ const RestaurantPage = (props) => {
                 <h4>Location </h4>
                 <Value>{location}</Value>
             </div>
-            {/* Use lat long to display map */}
+            <GoogleMap 
+                locations={getLocationsFromRestaurants([restaurant])}
+            />
             <h3>Ratings</h3>
             <div>
                 {

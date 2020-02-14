@@ -13,6 +13,7 @@ const PrimaryHeaderWrapper = styled.div`
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 500;
 `
 const AppName = styled.div`
     padding: 15px;
@@ -37,7 +38,7 @@ const Logout = styled.div`
 const PrimaryHeader = (props) => {
     return (
         <PrimaryHeaderWrapper>
-            <AppName><Link to="/">Wing Spots</Link></AppName>
+            <AppName><Link to="/">WING QUEST</Link></AppName>
             {props.isAuthenticated && <Logout onClick={props.logout}>Logout</Logout>}
         </PrimaryHeaderWrapper>
     );
