@@ -3,11 +3,13 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Rating from './Rating';
 import _ from 'lodash';
+import { BounceyLoader } from 'react-loaders-spinners';
 
 const RestaurantPageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 50px;
 `
 
@@ -18,6 +20,13 @@ const Image = styled.img`
 
 const Value = styled.div`
     margin-left: 15px;
+`
+
+const Loading = styled.div`
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const RestaurantPage = (props) => {
@@ -33,16 +42,24 @@ const RestaurantPage = (props) => {
             axios({method: 'get', url: restaurantUrl, headers}),
             axios({method: 'get', url: ratingUrl, headers})
         ]).then(axios.spread(function(restaurantResp, ratingResp) {
-            toggleLoadingData(false);
             setRestaurant(restaurantResp.data);
             setRatings(ratingResp.data);
         })).catch(err => {
             console.log(err);
+        }).finally(() => {
+            toggleLoadingData(false);
         })
     }, [])
 
     let address2 = restaurant.address2 ? ` ${restaurant.address2}` : "";
     let location = restaurant.address1 ? `${restaurant.address1}${address2} ${restaurant.city}, ${restaurant.state} ${restaurant.zip}` : null;
+    if (loadingData) {
+        return (
+            <Loading>
+                <BounceyLoader loading={loadingData} />
+            </Loading>
+        )
+    }
     return (
         <RestaurantPageWrapper className="page">
             <h1>{restaurant.name}</h1>
