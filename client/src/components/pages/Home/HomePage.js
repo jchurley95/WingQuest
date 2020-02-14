@@ -24,7 +24,7 @@ const HomePage = (props) => {
         }).catch(err => {
             console.log(err);
         })
-    }, [])
+    }, [props.auth])
     return (
         <HomePageWrapper className="page">
             <RestaurantList>

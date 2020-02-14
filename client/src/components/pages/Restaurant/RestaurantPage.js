@@ -28,12 +28,12 @@ const RestaurantPage = (props) => {
     useEffect(() => {
         let restaurantUrl = `/api/restaurants/${props.match.params.restaurantId}`;
         let ratingUrl = `/api/ratings/${props.match.params.restaurantId}/rating`;
-        
         let headers = {access_token}
         axios.all([
             axios({method: 'get', url: restaurantUrl, headers}),
             axios({method: 'get', url: ratingUrl, headers})
         ]).then(axios.spread(function(restaurantResp, ratingResp) {
+            toggleLoadingData(false);
             setRestaurant(restaurantResp.data);
             setRatings(ratingResp.data);
         })).catch(err => {

@@ -24,9 +24,9 @@ const AppWrapper = styled.div`
 function App() {
   const [auth, setAuth] = useLocalStorage('Authorization', localStorage.getItem('Authorization'));
   const [isAuthenticated, toggleIsAuthenticated] = useState(checkIfUserHasAuthentication());
-  useEffect(() => {
-    toggleIsAuthenticated(checkIfUserHasAuthentication());
-  }, [auth]);
+    useEffect(() => {
+      toggleIsAuthenticated(checkIfUserHasAuthentication());
+    }, [auth]);
   function handleAuth(authResponse) {
     setAuth(JSON.stringify(authResponse));
   }
@@ -36,11 +36,11 @@ function App() {
   function logout() {
     setAuth('');
   }
-  const loginPage = () => (
-    <LoginPage handleAuth={handleAuth} isAuthenticated={isAuthenticated}/>
+  const loginPage = (props) => (
+    <LoginPage handleAuth={handleAuth} isAuthenticated={isAuthenticated} {...props}/>
   )
-  const homePage = () => (
-    <HomePage auth={auth} />
+  const homePage = (props) => (
+    <HomePage auth={auth} {...props} />
   )
   const restaurantPage = (props) => (
     <RestaurantPage auth={auth} {...props} />

@@ -25,7 +25,7 @@ function getStars(numberOfStars, filled) {
 
 const Rating = (props) => {
     const starRatings = {};
-    Object.keys(props.rating).map(key => {
+    Object.keys(props.rating).forEach(key => {
         if (key !== "id") {
             starRatings[key] = getStars(props.rating[key], true) + " " + getStars(5 - props.rating[key], false);
         }
