@@ -12,6 +12,7 @@ const Judgement = styled.ul`
     list-style-type: square;
 `
 const Value = styled.li`
+    color: #777;
 `
 
 function getStars(numberOfStars, filled) {
