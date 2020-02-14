@@ -3,8 +3,15 @@ const router = express.Router();
 const axios = require('axios');
 const config = require('../config/config.js');
 
+let authToken;
+router.use((req, res, next) => {
+    if (req.headers.access_token) {
+        authToken = `Bearer ${req.headers.access_token}`
+    }
+    next();
+})
+
 router.get("/", (req, res) => {
-    let authToken = `Bearer ${req.headers.access_token}`
     let url = config.urls.WING_QUEST_BASE_URL + "/restaurant"
     axios({
         method: "GET",
@@ -22,7 +29,6 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
-    let authToken = `Bearer ${req.headers.access_token}`
     let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.params.id
     axios({
         method: "GET",
@@ -36,6 +42,22 @@ router.get("/:id", (req, res) => {
     }).catch(err => {
         console.log(err);
         res.send(err);
+    })
+})
+
+router.get("/:id/rating", (req, res) => {
+    let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.params.id + "/rating"
+    axios({
+        method: 'GET',
+        url,
+        headers: {
+            'accept': 'application/json',
+            'Authorization': authToken
+        }
+    }).then(response => {
+
+    }).catch(err => {
+        
     })
 })
 
