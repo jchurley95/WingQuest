@@ -15,11 +15,15 @@ import useLocalStorage from 'react-use-localstorage';
 const AppWrapper = styled.div`
   font-size: 16px;
   color: #444;
+
+  .page {
+    padding-top: 100px;
+  }
 `
 
 function App() {
-  const [auth, setAuth] = useLocalStorage('Authorization', null);
-  const [isAuthenticated, toggleIsAuthenticated] = useState(false);
+  const [auth, setAuth] = useLocalStorage('Authorization', localStorage.getItem('Authorization'));
+  const [isAuthenticated, toggleIsAuthenticated] = useState(checkIfUserHasAuthentication());
   useEffect(() => {
     toggleIsAuthenticated(checkIfUserHasAuthentication());
   }, [auth]);
@@ -42,7 +46,7 @@ function App() {
     <RestaurantPage auth={auth} {...props} />
   )
   const PrivateRoute = ({component: Component, ...rest}) => {
-    return <Route {...rest}
+    return <Route {...rest} exact
       render={(props) => (
         isAuthenticated
         ?

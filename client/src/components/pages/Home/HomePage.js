@@ -14,7 +14,7 @@ const RestaurantList = styled.div`
 const HomePage = (props) => {
     const [restaurants, setRestaurants] = useState([]);
     useEffect(() => {
-        let access_token = JSON.parse(props.auth).access_token;
+        let access_token = props.auth ? JSON.parse(props.auth).access_token : null;
         axios({
             method: "get",
             url: "/api/restaurants",
@@ -27,7 +27,7 @@ const HomePage = (props) => {
         })
     }, [])
     return (
-        <HomePageWrapper>
+        <HomePageWrapper className="page">
             <RestaurantList>
                 {
                     restaurants.map((restaurant, index) => {

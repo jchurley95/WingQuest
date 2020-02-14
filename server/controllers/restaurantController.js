@@ -4,7 +4,6 @@ const axios = require('axios');
 const config = require('../config/config.js');
 
 router.get("/", (req, res) => {
-    console.log(req.headers.access_token)
     let authToken = `Bearer ${req.headers.access_token}`
     let url = config.urls.WING_QUEST_BASE_URL + "/restaurant"
     axios({
@@ -22,9 +21,9 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
-    console.log(req.headers.access_token)
     let authToken = `Bearer ${req.headers.access_token}`
-    let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.header.restaurantId
+    console.log(req.params)
+    let url = config.urls.WING_QUEST_BASE_URL + "/restaurant/" + req.params.id
     axios({
         method: "GET",
         url,

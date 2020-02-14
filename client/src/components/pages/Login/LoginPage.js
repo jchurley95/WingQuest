@@ -64,7 +64,7 @@ const LoginPage = (props) => {
         return <Redirect to="/" />
     }
     return (
-        <LoginPageWrapper>
+        <LoginPageWrapper className="page">
             <LoginBox>
                 <SignIn>Sign In</SignIn>
                 <Label htmlFor="username-input">
