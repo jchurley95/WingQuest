@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Ratings from './Ratings';
+import Rating from './Rating';
+import _ from 'lodash';
 
 const RestaurantPageWrapper = styled.div`
     display: flex;
@@ -35,7 +36,6 @@ const RestaurantPage = (props) => {
         ]).then(axios.spread(function(restaurantResp, ratingResp) {
             setRestaurant(restaurantResp.data);
             setRatings(ratingResp.data);
-            console.log(ratingResp)
         })).catch(err => {
             console.log(err);
         })
@@ -54,9 +54,16 @@ const RestaurantPage = (props) => {
                 <Value>{location}</Value>
             </div>
             {/* Use lat long to display map */}
-            <Ratings 
-                ratings={ratings}
-            />
+            <h3>Ratings</h3>
+            <div>
+                {
+                    _.orderBy(ratings, 'flavor', 'asc').map((rating, index) => {
+                        return (
+                            <Rating key={index} rating={rating}/>
+                        )
+                    })
+                }
+            </div>
         </RestaurantPageWrapper>
     );
 };
